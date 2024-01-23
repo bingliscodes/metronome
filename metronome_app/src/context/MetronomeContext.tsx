@@ -14,7 +14,7 @@ const MetronomeContext = createContext<MetronomeContextData | undefined>(
 export const useMetronome = () => {
   const context = useContext(MetronomeContext);
   if (context === undefined) {
-    throw new Error("useMetronome must be used within a Metronome Provider");
+    throw new Error("useMetronome must be used within a MetronomeProvider");
   }
   return context;
 };
