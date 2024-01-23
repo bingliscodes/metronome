@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import { useMetronome } from "../context/MetronomeContext";
 
 interface TempoControlProps {
-  // Define props here if needed
+  bpm: number;
+  setBpm: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const TempoControl: React.FC<TempoControlProps> = (props) => {
-  const { bpm, setBpm } = useMetronome();
-
+const TempoControl: React.FC<TempoControlProps> = ({ bpm, setBpm }) => {
   const handleBpmChange = (newBpm: number) => {
     setBpm(newBpm);
   };

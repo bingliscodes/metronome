@@ -1,19 +1,23 @@
 import TempoControl from "./components/TempoControl.tsx";
 import TimeSignatureControl from "./components/TimeSignatureControl.tsx";
-import { MetronomeProvider } from "./context/MetronomeContext.tsx";
+import React, { useState } from "react";
 import StartStopButton from "./components/StartStopButton.tsx";
-import MetronomeControls from "./components/MetronomeControls.tsx";
-import SoundTest from "./components/SoundTest.tsx";
 import "./App.css";
+import MetronomeContext from "./context/MetronomeContext.tsx";
 
-const App: React.FC = () => {
+function App() {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const value = { isPlaying, setIsPlaying };
+  const [bpm, setBpm] = useState<number>(120);
   return (
-    <MetronomeProvider>
-      <div className="App">
-        <SoundTest />
-      </div>
-    </MetronomeProvider>
+    <div>
+      <MetronomeContext.Provider value={value}>
+        <StartStopButton bpm={bpm} />
+        <TempoControl bpm={bpm} setBpm={setBpm} />
+        <TimeSignatureControl />
+      </MetronomeContext.Provider>
+    </div>
   );
-};
+}
 
 export default App;

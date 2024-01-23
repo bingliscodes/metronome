@@ -1,11 +1,6 @@
 import React, { useState } from "react";
 import { Dropdown } from "react-bootstrap";
-import { useMetronome } from "../context/MetronomeContext.tsx";
 import "bootstrap/dist/css/bootstrap.min.css";
-
-interface TimeSignatureControlProps {
-  // Define props here if needed, like a callback to update the time signature in the parent component
-}
 
 const TimeSignatureControl = () => {
   return (
@@ -20,9 +15,7 @@ const TimeSignatureControl = () => {
   );
 };
 
-const TimeSignatureControlTop: React.FC<TimeSignatureControlProps> = (
-  props
-) => {
+const TimeSignatureControlTop: React.FC = () => {
   const [timeSignatureTop, setTimeSignatureTop] = useState<number>(4);
   const numbers = Array.from({ length: 16 }, (_, i) => i + 1);
   return (
@@ -43,9 +36,7 @@ const TimeSignatureControlTop: React.FC<TimeSignatureControlProps> = (
     </Dropdown>
   );
 };
-const TimeSignatureControlBot: React.FC<TimeSignatureControlProps> = (
-  props
-) => {
+const TimeSignatureControlBot: React.FC = () => {
   const [timeSignatureBot, setTimeSignatureBot] = useState<number>(4);
   return (
     <Dropdown>
