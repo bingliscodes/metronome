@@ -10,7 +10,7 @@ const StartStopButton: React.FC<StartStopButtonProps> = ({ bpm }) => {
   const audio = new Audio(click2);
 
   const [isPlaying, setIsPlaying] = useState(false);
-  const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
+  const [intervalId, setIntervalId] = useState<number | null>(null);
   //const { isPlaying, setIsPlaying } = useContext(MetronomeContext);
   useEffect(() => {
     if (isPlaying) {

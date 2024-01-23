@@ -18,7 +18,3 @@ const SoundTest: React.FC = () => {
   return <button onClick={handleClick}>Play Test</button>;
 };
 export default SoundTest;
-
-//Need to convert BPM to clicks
-//60 BPM -> 60 clicks in 1 minute, or 1 click every second
-//Need to call set interval on (60 / bpm * 1000)
