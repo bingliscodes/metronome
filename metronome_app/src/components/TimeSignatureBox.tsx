@@ -1,22 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Dropdown } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import {
+  TimeSignatureBotContext,
+  TimeSignatureTopContext,
+} from "../context/MetronomeContext";
 
-interface TimeSignatureBoxProps {
-  values: Array<number>;
-}
-
-const TimeSignatureBox: React.FC<TimeSignatureBoxProps> = ({ values }) => {
-  const [value, setValue] = useState<number>(4);
+export const TimeSignatureBoxTop: React.FC = () => {
+  const { timeSignatureTop, setTimeSignatureTop } = useContext(
+    TimeSignatureTopContext
+  );
+  const topVals = Array.from({ length: 16 }, (_, i) => i + 1);
 
   return (
     <Dropdown>
       <Dropdown.Toggle variant="primary" id="dropdown-basic">
-        {value}
+        {timeSignatureTop}
       </Dropdown.Toggle>
       <Dropdown.Menu>
-        {values.map((val) => (
-          <Dropdown.Item key={val} onClick={() => setValue(val)}>
+        {topVals.map((val) => (
+          <Dropdown.Item key={val} onClick={() => setTimeSignatureTop(val)}>
             {val}
           </Dropdown.Item>
         ))}
@@ -25,4 +28,23 @@ const TimeSignatureBox: React.FC<TimeSignatureBoxProps> = ({ values }) => {
   );
 };
 
-export default TimeSignatureBox;
+export const TimeSignatureBoxBot: React.FC = () => {
+  const { timeSignatureBot, setTimeSignatureBot } = useContext(
+    TimeSignatureBotContext
+  );
+  const botVals = [1, 2, 4, 8];
+  return (
+    <Dropdown>
+      <Dropdown.Toggle variant="primary" id="dropdown-basic">
+        {timeSignatureBot}
+      </Dropdown.Toggle>
+      <Dropdown.Menu>
+        {botVals.map((val) => (
+          <Dropdown.Item key={val} onClick={() => setTimeSignatureBot(val)}>
+            {val}
+          </Dropdown.Item>
+        ))}
+      </Dropdown.Menu>
+    </Dropdown>
+  );
+};

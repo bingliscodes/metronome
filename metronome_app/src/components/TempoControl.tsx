@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
+import { BpmContext } from "../context/MetronomeContext";
 
-interface TempoControlProps {
-  bpm: number;
-  setBpm: React.Dispatch<React.SetStateAction<number>>;
-}
+const TempoControl: React.FC = () => {
+  const { bpm, setBpm } = useContext(BpmContext);
 
-const TempoControl: React.FC<TempoControlProps> = ({ bpm, setBpm }) => {
   const handleBpmChange = (newBpm: number) => {
     setBpm(newBpm);
   };

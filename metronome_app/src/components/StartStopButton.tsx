@@ -1,11 +1,16 @@
 import React, { useState, useContext, useEffect } from "react";
 import click2 from "./click2.mp3";
+import {
+  BpmContext,
+  TimeSignatureTopContext,
+  TimeSignatureBotContext,
+} from "../context/MetronomeContext";
 
-interface StartStopButtonProps {
-  bpm: number;
-}
+const StartStopButton: React.FC = () => {
+  const timeSignatureTop = useContext(TimeSignatureTopContext);
+  const timeSignatureBot = useContext(TimeSignatureBotContext);
+  const { bpm, setBpm } = useContext(BpmContext);
 
-const StartStopButton: React.FC<StartStopButtonProps> = ({ bpm }) => {
   let intervalMs = (60 / bpm) * 1000;
   const audio = new Audio(click2);
 
@@ -29,6 +34,9 @@ const StartStopButton: React.FC<StartStopButtonProps> = ({ bpm }) => {
 
   const startPlaying = () => {
     setIsPlaying(true);
+    console.log(timeSignatureTop, ":", timeSignatureBot);
+    console.log("intervalMs is", intervalMs);
+    console.log("bpm is", bpm);
   };
 
   const stopPlaying = () => {
