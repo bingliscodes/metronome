@@ -15,7 +15,6 @@ const StartStopButton: React.FC = () => {
   const audioBufferRef = useRef<AudioBuffer | null>(null);
   const nextNoteTimeRef = useRef<number>(0);
   const schedulerIdRef = useRef<number | null>(null);
-  let intervalMs = (60 / bpm) * 1000;
 
   const preloadAudio = async (url: string) => {
     try {
