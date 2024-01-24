@@ -9,13 +9,17 @@ const TempoControl: React.FC = () => {
   };
   return (
     <div>
-      <button onClick={() => handleBpmChange(bpm - 1)}>-</button>
+      <button className="btn btn-dark" onClick={() => handleBpmChange(bpm - 1)}>
+        -
+      </button>
       <input
         type="number"
         value={bpm}
         onChange={(e) => handleBpmChange(parseInt(e.target.value, 10))}
       />
-      <button onClick={() => handleBpmChange(bpm + 1)}>+</button>
+      <button className="btn btn-dark" onClick={() => handleBpmChange(bpm + 1)}>
+        +
+      </button>
     </div>
   );
 };
