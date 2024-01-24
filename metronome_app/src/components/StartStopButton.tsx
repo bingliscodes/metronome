@@ -5,7 +5,6 @@ import {
   TimeSignatureBotContext,
   IsPlayingContext,
 } from "../context/MetronomeContext";
-import playClick from "../context/AudioContext";
 
 const StartStopButton: React.FC = () => {
   const timeSignatureTop = useContext(TimeSignatureTopContext);
