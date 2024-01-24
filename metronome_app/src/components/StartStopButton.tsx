@@ -6,13 +6,14 @@ import {
   TimeSignatureBotContext,
   IsPlayingContext,
 } from "../context/MetronomeContext";
+import playClick from "../context/AudioContext";
 
 const StartStopButton: React.FC = () => {
   const timeSignatureTop = useContext(TimeSignatureTopContext);
   const timeSignatureBot = useContext(TimeSignatureBotContext);
   const { bpm, setBpm } = useContext(BpmContext);
   const { isPlaying, setIsPlaying } = useContext(IsPlayingContext);
-
+  let AC = new AudioContext();
   let intervalMs = (60 / bpm) * 1000;
   const audio = new Audio(click2);
 
@@ -23,7 +24,8 @@ const StartStopButton: React.FC = () => {
       // Start playing
       const id = setInterval(() => {
         //console.log("Playing metronome. BPM is", { bpm });
-        audio.play().catch((e) => console.error("Error playing sound:", e));
+        //audio.play().catch((e) => console.error("Error playing sound:", e));
+        playClick(AC, "/click2.mp3");
       }, intervalMs);
       setIntervalId(id);
     } else if (intervalId) {

@@ -1,19 +1,13 @@
+//SoundTest.tsx
 import React, { useState, useEffect, useContext } from "react";
-import playSound from "./playSound.tsx";
-import click2 from "./click2.mp3";
-import MetronomeContext from "../context/MetronomeContext.tsx";
+import playClick from "../context/AudioContext";
 
 const SoundTest: React.FC = () => {
-  const { isPlaying, setIsPlaying } = useContext(MetronomeContext);
+  let testSound = "https://actions.google.com/sounds/v1/alarms/beep_short.ogg";
+  let filePath = "/click2.mp3";
+  let AC = new AudioContext();
   const handleClick = () => {
-    if (isPlaying) {
-      const interval = setInterval(() => {
-        playSound(click2);
-      }, 1000);
-      return () => clearInterval(interval);
-    } else {
-      console.log("cannot play. isPlaying is", isPlaying);
-    }
+    playClick(AC, filePath);
   };
   return <button onClick={handleClick}>Play Test</button>;
 };

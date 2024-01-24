@@ -9,6 +9,7 @@ import {
   IsPlayingContext,
 } from "./context/MetronomeContext.tsx";
 import "./App.css";
+import SoundTest from "./components/SoundTest.tsx";
 
 function App() {
   const [timeSignatureTop, setTimeSignatureTop] = useState<number>(4);
@@ -25,6 +26,7 @@ function App() {
         >
           <BpmContext.Provider value={{ bpm, setBpm }}>
             <IsPlayingContext.Provider value={{ isPlaying, setIsPlaying }}>
+              <SoundTest />
               <StartStopButton />
               <TempoControl />
               <TimeSignatureControl />
