@@ -26,7 +26,6 @@ function App() {
         >
           <BpmContext.Provider value={{ bpm, setBpm }}>
             <IsPlayingContext.Provider value={{ isPlaying, setIsPlaying }}>
-              <SoundTest />
               <StartStopButton />
               <TempoControl />
               <TimeSignatureControl />
