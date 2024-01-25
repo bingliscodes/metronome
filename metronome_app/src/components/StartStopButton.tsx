@@ -89,10 +89,10 @@ const StartStopButton: React.FC = () => {
 
   return (
     <div>
-      <button className="btn btn-dark" onClick={startPlaying}>
+      <button className="btn btn-dark btn-lg" onClick={startPlaying}>
         Start
       </button>
-      <button className="btn btn-dark" onClick={stopPlaying}>
+      <button className="btn btn-dark btn-lg" onClick={stopPlaying}>
         Stop
       </button>
     </div>

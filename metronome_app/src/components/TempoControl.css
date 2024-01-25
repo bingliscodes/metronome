@@ -1,0 +1,27 @@
+.tempo-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px; /* Spacing between elements */
+  }
+  
+  .tempo-btn {
+    padding: 25px 10px; /* Larger buttons */
+    font-size: 3rem; /* Larger text */
+    background: rgb(183, 211, 221);
+  }
+  
+  .tempo-input {
+    width: 150px; /* Adjust width as needed */
+    height: 150px; /* Make height equal to width for a circle */
+    border-radius: 50%; /* This creates the circular shape */
+    text-align: center;
+    font-size: 2rem; /* Larger font size for better readability */
+    line-height: 100px; /* Center the text vertically */
+    border: 10px solid #130522; /* Optional: add a border */
+    background: rgb(0, 94, 128); /* Optional: background color */
+    color: #fff; /* Text color */
+    outline: none; /* Remove focus outline */
+    margin: 0 10px; /* Add some margin if needed */
+  }
+  
