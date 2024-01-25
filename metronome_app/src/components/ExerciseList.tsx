@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-interface Exercise {
+export interface Exercise {
   _id: string;
   name: string;
   bpm: number;
@@ -11,8 +11,12 @@ interface Exercise {
   datePracticed: Date;
 }
 
+interface ExerciseRowProps {
+  exercise: Exercise;
+  onDelete: (id: string) => void;
+}
 //functional component to return a row given an exercise. This allows us to handle front-end and back-end deletion simultaneously
-const ExerciseRow = ({ exercise, onDelete }) => {
+const ExerciseRow: React.FC<ExerciseRowProps> = ({ exercise, onDelete }) => {
   const handleDelete = async () => {
     try {
       await axios.delete(`http://localhost:5001/exercises/${exercise._id}`);

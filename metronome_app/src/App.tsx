@@ -3,6 +3,7 @@ import TimeSignatureControl from "./components/TimeSignatureControl.tsx";
 import React, { useState } from "react";
 import StartStopButton from "./components/StartStopButton.tsx";
 import ExerciseForm from "./components/ExerciseForm.tsx";
+import ExerciseSelector from "./components/ExerciseSelector.tsx";
 import {
   TimeSignatureTopContext,
   TimeSignatureBotContext,
@@ -32,6 +33,7 @@ function App() {
               <TimeSignatureControl />
               <ExerciseForm />
               <ExerciseList />
+              <ExerciseSelector />
             </IsPlayingContext.Provider>
           </BpmContext.Provider>
         </TimeSignatureBotContext.Provider>

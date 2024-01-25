@@ -9,7 +9,7 @@ import {
 const StartStopButton: React.FC = () => {
   const { timeSignatureTop } = useContext(TimeSignatureTopContext);
   const { timeSignatureBot } = useContext(TimeSignatureBotContext);
-  const { bpm, setBpm } = useContext(BpmContext);
+  const { bpm } = useContext(BpmContext);
   const { isPlaying, setIsPlaying } = useContext(IsPlayingContext);
   const audioContextRef = useRef<AudioContext | null>(null);
   const audioBufferRef = useRef<AudioBuffer | null>(null);

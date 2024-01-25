@@ -41,13 +41,15 @@ const ExerciseForm: React.FC = () => {
   return (
     <form onSubmit={handleSubmit}>
       <input
+        className="input-group input-group-lg"
+        id=""
         type="text"
         name="name"
         value={exerciseName}
         onChange={handleChange}
-        placeholder="Exercise Name"
+        placeholder="Select from below or add new Exercise"
       />
-      <button type="submit">Add Exercise</button>
+      <button type="submit">Add New Exercise</button>
     </form>
   );
 };
