@@ -2,6 +2,7 @@ import TempoControl from "./components/TempoControl.tsx";
 import TimeSignatureControl from "./components/TimeSignatureControl.tsx";
 import React, { useState } from "react";
 import StartStopButton from "./components/StartStopButton.tsx";
+import ExerciseForm from "./components/ExerciseForm.tsx";
 import {
   TimeSignatureTopContext,
   TimeSignatureBotContext,
@@ -9,6 +10,7 @@ import {
   IsPlayingContext,
 } from "./context/MetronomeContext.tsx";
 import "./App.css";
+import ExerciseList from "./components/ExerciseList.tsx";
 
 function App() {
   const [timeSignatureTop, setTimeSignatureTop] = useState<number>(4);
@@ -28,6 +30,8 @@ function App() {
               <StartStopButton />
               <TempoControl />
               <TimeSignatureControl />
+              <ExerciseForm />
+              <ExerciseList />
             </IsPlayingContext.Provider>
           </BpmContext.Provider>
         </TimeSignatureBotContext.Provider>

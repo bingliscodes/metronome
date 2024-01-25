@@ -4,6 +4,7 @@ import Exercise from '../models/Exercise';
 const router = express.Router();
 
 router.post('/', async (req: Request, res: Response) => {
+    console.log(req.body);
     try {
       const newExercise = new Exercise(req.body);
       const savedExercise = await newExercise.save();
@@ -32,5 +33,17 @@ router.post('/', async (req: Request, res: Response) => {
     }
   });
   
+// DELETE endpoint to remove an exercise
+  router.delete('/:id', async (req: Request, res: Response) => {
+    try {
+      const result = await Exercise.findByIdAndDelete(req.params.id);
+      if (!result) {
+        return res.status(404).send('Exercise not found');
+      }
+      res.send(result);
+    } catch (error: any) {
+      res.status(500).send({message: error.message});
+    }
+  });
 
 export default router;

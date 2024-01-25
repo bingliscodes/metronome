@@ -7,8 +7,8 @@ import {
 } from "../context/MetronomeContext";
 
 const StartStopButton: React.FC = () => {
-  const timeSignatureTop = useContext(TimeSignatureTopContext);
-  const timeSignatureBot = useContext(TimeSignatureBotContext);
+  const { timeSignatureTop } = useContext(TimeSignatureTopContext);
+  const { timeSignatureBot } = useContext(TimeSignatureBotContext);
   const { bpm, setBpm } = useContext(BpmContext);
   const { isPlaying, setIsPlaying } = useContext(IsPlayingContext);
   const audioContextRef = useRef<AudioContext | null>(null);

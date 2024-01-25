@@ -7,6 +7,7 @@ const express_1 = __importDefault(require("express"));
 const Exercise_1 = __importDefault(require("../models/Exercise"));
 const router = express_1.default.Router();
 router.post('/', async (req, res) => {
+    console.log(req.body);
     try {
         const newExercise = new Exercise_1.default(req.body);
         const savedExercise = await newExercise.save();

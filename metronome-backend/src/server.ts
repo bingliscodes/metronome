@@ -8,9 +8,10 @@ dotenv.config();
 
 const app = express();
 
-app.use('/exercises', exercisesRouter);
-app.use(cors());
 app.use(express.json());
+app.use(cors());
+app.use('/exercises', exercisesRouter);
+
 
 mongoose.connect(process.env.MONGO_URI as string)
   .then(() => console.log('MongoDB connected'))
