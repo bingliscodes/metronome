@@ -38,4 +38,17 @@ router.get('/', async (req, res) => {
         }
     }
 });
+// DELETE endpoint to remove an exercise
+router.delete('/:id', async (req, res) => {
+    try {
+        const result = await Exercise_1.default.findByIdAndDelete(req.params.id);
+        if (!result) {
+            return res.status(404).send('Exercise not found');
+        }
+        res.send(result);
+    }
+    catch (error) {
+        res.status(500).send({ message: error.message });
+    }
+});
 exports.default = router;
