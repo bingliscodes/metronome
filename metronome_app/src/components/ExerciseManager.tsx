@@ -99,7 +99,12 @@ const ExerciseManager: React.FC = () => {
         );
         //console.log(selectedExerciseId);
         //console.log(response.data);
-        // Optionally, you can fetch the exercises again to update the UI
+
+        // Update the exerciseHistory state
+        setExerciseHistory((prevHistory) => [
+          ...prevHistory,
+          response.data.updatedHistoryEntry,
+        ]);
       } catch (error) {
         console.error(
           "There was an error updating the exercise history:",

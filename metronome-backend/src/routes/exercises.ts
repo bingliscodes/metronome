@@ -64,8 +64,10 @@ router.post('/', async (req: Request, res: Response) => {
         { new: true } // This option returns the updated document
       );
 
-      if (!updatedExercise) {
-        return res.status(404).json({ message: 'Exercise not found' });
+      if (updatedExercise) {
+        res.json({ updatedHistoryEntry: newHistoryEntry });
+      } else {
+        res.status(404).json({ message: 'Exercise not found' });
       }
 
       res.status(200).json(updatedExercise);
