@@ -29,6 +29,14 @@ function addHistoryEntry(exercise: Exercise, newEntry: HistoryEntry): Exercise {
 
 const ExerciseSelector = () => {
   const [exercises, setExercises] = useState<Exercise[]>([]);
+  const { timeSignatureTop } = useContext(TimeSignatureTopContext);
+  const { timeSignatureBot } = useContext(TimeSignatureBotContext);
+  const { bpm } = useContext(BpmContext);
+  const [exerciseName, setExerciseName] = useState<string>("");
+
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setExerciseName(e.target.value);
+  };
 
   useEffect(() => {
     const fetchExercises = async () => {
@@ -37,23 +45,48 @@ const ExerciseSelector = () => {
           "http://localhost:5001/exercises"
         );
         setExercises(response.data);
-      } catch (err: any) {}
+      } catch (err: any) {
+        console.log("there was an error getting the ecxercises.");
+      }
     };
 
     fetchExercises();
   }, []);
 
-  const handleSubmit = () => {};
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const exerciseData = {
+        name: exerciseName,
+        history: [],
+      };
+
+      const response = await axios.post(
+        "http://localhost:5001/exercisesWithHistory",
+        exerciseData
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error("There was an error submitting the form:", error);
+    }
+  };
   return (
     <form onSubmit={handleSubmit}>
       <div className="form-group">
         <label htmlFor="ExerciseSelectForm">Select exercise from below</label>
-        <select className="form-control" id="ExerciseSelectForm">
+        <select
+          className="form-control"
+          id="ExerciseSelectForm"
+          onChange={handleChange}
+        >
           {exercises.map((exercise) => (
-            <option key={exercise._id}>{exercise.name}</option>
+            <option key={exercise._id} value={exercise.name}>
+              {exercise.name}
+            </option>
           ))}
         </select>
       </div>
+      <button type="submit">Update Exercise History</button>
     </form>
   );
 };

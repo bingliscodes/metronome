@@ -10,10 +10,10 @@ interface IExercise extends Document {
 
 const exerciseSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  bpm: { type: Number, required: true },
-  timeSignatureTop: { type: Number, required: true },
-  timeSignatureBot: { type: Number, required: true },
-  datePracticed: { type: Date, required: true }
+  bpm: { type: Number, required: false },
+  timeSignatureTop: { type: Number, required: false },
+  timeSignatureBot: { type: Number, required: false },
+  datePracticed: { type: Date, required: false }
 });
 
 const Exercise = mongoose.model<IExercise>('Exercise', exerciseSchema);

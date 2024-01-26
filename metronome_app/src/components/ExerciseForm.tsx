@@ -1,16 +1,16 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
-import {
-  BpmContext,
-  TimeSignatureTopContext,
-  TimeSignatureBotContext,
-} from "../context/MetronomeContext";
+// import {
+//   BpmContext,
+//   TimeSignatureTopContext,
+//   TimeSignatureBotContext,
+// } from "../context/MetronomeContext";
 
 const ExerciseForm: React.FC = () => {
   const [exerciseName, setExerciseName] = useState<string>("");
-  const { timeSignatureTop } = useContext(TimeSignatureTopContext);
-  const { timeSignatureBot } = useContext(TimeSignatureBotContext);
-  const { bpm } = useContext(BpmContext);
+  // const { timeSignatureTop } = useContext(TimeSignatureTopContext);
+  // const { timeSignatureBot } = useContext(TimeSignatureBotContext);
+  // const { bpm } = useContext(BpmContext);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setExerciseName(e.target.value);
@@ -21,10 +21,10 @@ const ExerciseForm: React.FC = () => {
     try {
       const exerciseData = {
         name: exerciseName,
-        bpm: bpm,
-        timeSignatureTop: timeSignatureTop,
-        timeSignatureBot: timeSignatureBot,
-        datePracticed: new Date().toISOString(),
+        // bpm: bpm,
+        // timeSignatureTop: timeSignatureTop,
+        // timeSignatureBot: timeSignatureBot,
+        // datePracticed: new Date().toISOString(),
       };
 
       const response = await axios.post(
