@@ -1,3 +1,4 @@
+//ExerciseSelector.tsx
 import React, { useState, useContext, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
@@ -20,54 +21,42 @@ interface Exercise {
   history: HistoryEntry[];
 }
 
-function addHistoryEntry(exercise: Exercise, newEntry: HistoryEntry): Exercise {
-  return {
-    ...exercise,
-    history: [...exercise.history, newEntry],
-  };
-}
-
 const ExerciseSelector = () => {
   const [exercises, setExercises] = useState<Exercise[]>([]);
+  const [selectedExerciseId, setSelectedExerciseId] = useState<string>("");
   const { timeSignatureTop } = useContext(TimeSignatureTopContext);
   const { timeSignatureBot } = useContext(TimeSignatureBotContext);
   const { bpm } = useContext(BpmContext);
   const [exerciseName, setExerciseName] = useState<string>("");
 
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setExerciseName(e.target.value);
-  };
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {};
 
-  useEffect(() => {
-    const fetchExercises = async () => {
-      try {
-        const response = await axios.get<Exercise[]>(
-          "http://localhost:5001/exercises"
-        );
-        setExercises(response.data);
-      } catch (err: any) {
-        console.log("there was an error getting the ecxercises.");
-      }
-    };
-
-    fetchExercises();
-  }, []);
+  useEffect(() => {}, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const newEntry: HistoryEntry = {
+      bpm: bpm,
+      date: new Date(),
+      timeSignatureTop: timeSignatureTop,
+      timeSignatureBot: timeSignatureBot,
+    };
+    console.log(newEntry);
+    if (!selectedExerciseId) {
+      console.error("No exercise selected");
+      return;
+    }
     try {
-      const exerciseData = {
-        name: exerciseName,
-        history: [],
-      };
-
-      const response = await axios.post(
-        "http://localhost:5001/exercisesWithHistory",
-        exerciseData
+      // Update the history of the selected exercise
+      const response = await axios.put(
+        `http://localhost:5001/exercises/${selectedExerciseId}`,
+        { newEntry }
       );
+      console.log(selectedExerciseId);
       console.log(response.data);
+      // Optionally, you can fetch the exercises again to update the UI
     } catch (error) {
-      console.error("There was an error submitting the form:", error);
+      console.error("There was an error updating the exercise history:", error);
     }
   };
   return (
