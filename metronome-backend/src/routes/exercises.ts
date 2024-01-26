@@ -32,6 +32,25 @@ router.post('/', async (req: Request, res: Response) => {
       }
     }
   });
+
+  // GET endpoint to fetch history of a specific exercise
+  router.get('/history/:id', async (req: Request, res: Response) => {
+    try {
+      const exerciseId = req.params.id;
+      const exercise = await Exercise.findById(exerciseId);
+      if (!exercise) {
+        return res.status(404).json({ message: 'Exercise not found' });
+      }
+      res.json({ history: exercise.history });
+    } catch (error: any) {
+      if (error instanceof Error) {
+        res.status(500).json({ message: error.message });
+      } else {
+        res.status(500).json({ message: "An unknown error occurred" });
+      }
+    }
+  });
+
   // PUT endpoint to update an exercise's history
   router.put('/:id', async (req: Request, res: Response) => {
     const exerciseId = req.params.id;

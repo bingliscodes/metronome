@@ -9,7 +9,6 @@ import {
   IsPlayingContext,
 } from "./context/MetronomeContext.tsx";
 import "./App.css";
-import ExerciseList from "./components/ExerciseList.tsx";
 import ExerciseManager from "./components/ExerciseManager.tsx";
 
 function App() {
@@ -31,7 +30,6 @@ function App() {
               <TempoControl />
               <TimeSignatureControl />
               <ExerciseManager />
-              <ExerciseList />
             </IsPlayingContext.Provider>
           </BpmContext.Provider>
         </TimeSignatureBotContext.Provider>

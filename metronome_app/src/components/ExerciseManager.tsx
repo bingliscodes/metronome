@@ -1,20 +1,21 @@
 //ExerciseManager.tsx
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import ExerciseHistory from "./ExerciseHistory";
 import {
   BpmContext,
   TimeSignatureTopContext,
   TimeSignatureBotContext,
 } from "../context/MetronomeContext";
 
-interface HistoryEntry {
+export interface HistoryEntry {
   bpm: number;
   date: Date; // or Date, if you prefer to work with Date objects
   timeSignatureTop: number;
   timeSignatureBot: number;
 }
 
-interface Exercise {
+export interface Exercise {
   _id: string;
   name: string;
   history: HistoryEntry[];
@@ -24,6 +25,7 @@ const ExerciseManager: React.FC = () => {
   const [exercises, setExercises] = useState<Exercise[]>([]);
   const [selectedExerciseId, setSelectedExerciseId] = useState<string>("");
   const [exerciseName, setExerciseName] = useState<string>("");
+  const [exerciseHistory, setExerciseHistory] = useState<HistoryEntry[]>([]);
   const { bpm } = useContext(BpmContext);
   const { timeSignatureTop } = useContext(TimeSignatureTopContext);
   const { timeSignatureBot } = useContext(TimeSignatureBotContext);
@@ -43,8 +45,27 @@ const ExerciseManager: React.FC = () => {
     fetchExercises();
   }, []);
 
-  const handleExerciseChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleExerciseChange = async (
+    e: React.ChangeEvent<HTMLSelectElement>
+  ) => {
     setExerciseName(e.target.value);
+    const selectedExercise = exercises.find(
+      (exercise) => exercise.name === e.target.value
+    );
+    if (selectedExercise) {
+      setSelectedExerciseId(selectedExercise._id);
+
+      try {
+        const response = await axios.get(
+          `http://localhost:5001/exercises/history/${selectedExercise._id}`
+        );
+        //store the history of the selected exercise as a state. Now we can access this and display it
+        const history = response.data.history;
+        setExerciseHistory(history);
+      } catch (error) {
+        console.error("Error fetching exercise history:", error);
+      }
+    }
     const selectedId = exercises.find(
       (exercise) => exercise.name === e.target.value
     )?._id;
@@ -135,6 +156,7 @@ const ExerciseManager: React.FC = () => {
           {selectedExerciseId ? "Update Exercise" : "Add New Exercise"}
         </button>
       </form>
+      <ExerciseHistory history={exerciseHistory} />
     </div>
   );
 };
