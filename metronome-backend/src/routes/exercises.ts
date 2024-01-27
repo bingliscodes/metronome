@@ -4,7 +4,7 @@ import Exercise from '../models/Exercise';
 const router = express.Router();
 
 router.post('/', async (req: Request, res: Response) => {
-    console.log(req.body);
+    //console.log(req.body);
     try {
       const newExercise = new Exercise(req.body);
       const savedExercise = await newExercise.save();

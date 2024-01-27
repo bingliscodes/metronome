@@ -20,11 +20,19 @@ const StartStopButton: React.FC = () => {
     try {
       const response = await fetch(url);
       const arrayBuffer = await response.arrayBuffer();
-      audioBufferRef.current = await audioContextRef.current?.decodeAudioData(
+      const decodedData = await audioContextRef.current?.decodeAudioData(
         arrayBuffer
       );
+
+      if (decodedData) {
+        audioBufferRef.current = decodedData;
+      } else {
+        console.error("Failed to decode audio data");
+        audioBufferRef.current = null;
+      }
     } catch (error) {
       console.error("Error preloading audio:", error);
+      audioBufferRef.current = null;
     }
   };
 

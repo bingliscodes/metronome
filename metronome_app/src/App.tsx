@@ -2,6 +2,7 @@ import TempoControl from "./components/TempoControl.tsx";
 import TimeSignatureControl from "./components/TimeSignatureControl.tsx";
 import React, { useState } from "react";
 import StartStopButton from "./components/StartStopButton.tsx";
+//require("dotenv").config();
 import {
   TimeSignatureTopContext,
   TimeSignatureBotContext,
