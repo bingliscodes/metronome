@@ -7,7 +7,7 @@ const express_1 = __importDefault(require("express"));
 const Exercise_1 = __importDefault(require("../models/Exercise"));
 const router = express_1.default.Router();
 router.post('/', async (req, res) => {
-    console.log(req.body);
+    //console.log(req.body);
     try {
         const newExercise = new Exercise_1.default(req.body);
         const savedExercise = await newExercise.save();
@@ -28,6 +28,50 @@ router.get('/', async (req, res) => {
     try {
         const exercises = await Exercise_1.default.find();
         res.json(exercises);
+    }
+    catch (error) {
+        if (error instanceof Error) {
+            res.status(500).json({ message: error.message });
+        }
+        else {
+            res.status(500).json({ message: "An unknown error occurred" });
+        }
+    }
+});
+// GET endpoint to fetch history of a specific exercise
+router.get('/history/:id', async (req, res) => {
+    try {
+        const exerciseId = req.params.id;
+        const exercise = await Exercise_1.default.findById(exerciseId);
+        if (!exercise) {
+            return res.status(404).json({ message: 'Exercise not found' });
+        }
+        res.json({ history: exercise.history });
+    }
+    catch (error) {
+        if (error instanceof Error) {
+            res.status(500).json({ message: error.message });
+        }
+        else {
+            res.status(500).json({ message: "An unknown error occurred" });
+        }
+    }
+});
+// PUT endpoint to update an exercise's history
+router.put('/:id', async (req, res) => {
+    const exerciseId = req.params.id;
+    const newHistoryEntry = req.body.newEntry;
+    try {
+        // Find the exercise by ID and update its history
+        const updatedExercise = await Exercise_1.default.findByIdAndUpdate(exerciseId, { $push: { history: newHistoryEntry } }, { new: true } // This option returns the updated document
+        );
+        if (updatedExercise) {
+            res.json({ updatedHistoryEntry: newHistoryEntry });
+        }
+        else {
+            res.status(404).json({ message: 'Exercise not found' });
+        }
+        res.status(200).json(updatedExercise);
     }
     catch (error) {
         if (error instanceof Error) {

@@ -12,13 +12,17 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
-app.use('/user', userRouter);
 app.use('/exercises', exercisesRouter);
-app.use('/exercisesWithHistory', exercisesWithHistoryRouter);
+app.use('/user', userRouter);
+//app.use('/exercisesWithHistory', exercisesWithHistoryRouter);
 
 
 
-mongoose.connect(process.env.MONGO_URI as string)
+mongoose.connect(process.env.MONGO_URI as string, {
+  serverSelectionTimeoutMS: 5000, // Timeout for server selection (5000 ms)
+  socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
+  connectTimeoutMS: 50000  // Timeout for initial connection (10000 ms)
+})
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error(err));
 
