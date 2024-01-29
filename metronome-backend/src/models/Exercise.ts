@@ -19,6 +19,7 @@
 // const Exercise = mongoose.model<IExercise>('Exercise', exerciseSchema);
 // export default Exercise;
 
+//Exercise.ts
 import mongoose, { Document } from 'mongoose';
 
 export interface HistoryEntry {

@@ -1,0 +1,43 @@
+import dotenv from 'dotenv';
+
+require('dotenv').config();
+
+const mongoose = require('mongoose');
+
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+
+
+db.Exercise.insertOne({
+    name: "Sample Exercise",
+    history: [
+        {
+            bpm: 120,
+            date: new Date("2022-01-01T00:00:00Z"),
+            timeSignatureTop: 4,
+            timeSignatureBot: 4
+        }
+    ]
+});
+
+db.Exercise.find({});
+
+db.Exercise.findOne({ name: "Sample Exercise" });
+
+db.Exercise.updateOne(
+    { name: "Sample Exercise" },
+    {
+        $push: {
+            history: {
+                bpm: 130,
+                date: new Date("2022-01-02T00:00:00Z"),
+                timeSignatureTop: 3,
+                timeSignatureBot: 4
+            }
+        }
+    }
+);
+
+db.Exercise.deleteOne({ name: "Sample Exercise" });

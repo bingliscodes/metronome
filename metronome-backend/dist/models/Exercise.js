@@ -20,6 +20,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // });
 // const Exercise = mongoose.model<IExercise>('Exercise', exerciseSchema);
 // export default Exercise;
+//Exercise.ts
 const mongoose_1 = __importDefault(require("mongoose"));
 const historyEntrySchema = new mongoose_1.default.Schema({
     bpm: { type: Number, required: true },
